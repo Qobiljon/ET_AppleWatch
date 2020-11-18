@@ -55,14 +55,8 @@ class ETHealthKit {
     }
     
     
-    // permission check
-    private func requestHealthKitAuthorization(healthStore: HKHealthStore, completion: @escaping (Bool, Error?) -> Void) {
-        // authorization for what data
-        // request authorization
-        healthStore.requestAuthorization(toShare: [], read: sampleTypes, completion: completion)
-    }
-    
-    func sampleResultHandler(sampleQuery: HKSampleQuery, samples: [HKSample]?, error: Error?) {
+    // event handler (listener)
+    func sampleResultHandler(query: HKSampleQuery, samples: [HKSample]?, error: Error?) {
         guard let samples = samples else {
             if error != nil {
                 print("error \(error!)")
@@ -70,12 +64,27 @@ class ETHealthKit {
             return
         }
         if samples.count > 0 {
-            print("\(samples.count) samples, e.g., \(samples[0])")
+            for sample in samples {
+                let _sample = sample as! HKQuantitySample
+                let sampleType = query.objectType!
+                let timestamp = _sample.endDate.timeIntervalSince1970 * 1000
+                let value = _sample.quantity
+                
+                print("\(sampleType), \(timestamp), \(value)")
+            }
         }
     }
     
     
-    // sensor start/stop functions
+    // permission check
+    private func requestHealthKitAuthorization(healthStore: HKHealthStore, completion: @escaping (Bool, Error?) -> Void) {
+        // authorization for what data
+        // request authorization
+        healthStore.requestAuthorization(toShare: [], read: sampleTypes, completion: completion)
+    }
+    
+    
+    // sensing start/stop functions
     func startSensing() -> Bool {
         guard let healthStore = self.healthStore else { return false }
         
@@ -97,7 +106,6 @@ class ETHealthKit {
         }
         return true
     }
-    
     func stopSensing() -> Bool {
         return false
     }
