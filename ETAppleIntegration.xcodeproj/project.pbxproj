@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,12 @@
 		0AE6C4AF2563D98E00A033DA /* ETSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4AE2563D98E00A033DA /* ETSensor.swift */; };
 		0AE6C4B42563E32100A033DA /* ETHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4B32563E32100A033DA /* ETHealthKit.swift */; };
 		0AE6C4BC2564FF7900A033DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE6C4BB2564FF7900A033DA /* HealthKit.framework */; };
+		0AFD697D2565829D0082C11C /* et_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD697C2565829D0082C11C /* et_service.pb.swift */; };
+		0AFD6982256582A50082C11C /* et_service.proto in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD6981256582A50082C11C /* et_service.proto */; };
+		0AFD699C256587F70082C11C /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD699B256587F70082C11C /* SwiftProtobuf */; };
+		0AFD699E256587F70082C11C /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD699D256587F70082C11C /* SwiftProtobufPluginLibrary */; };
+		0AFD69B425658F0C0082C11C /* et_service.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD69B325658F0C0082C11C /* et_service.grpc.swift */; };
+		0AFD69FF256597F30082C11C /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 0AFD69FE256597F30082C11C /* GRPC */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +90,9 @@
 		0AE6C4B82564FF5700A033DA /* ETAppleIntegration WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ETAppleIntegration WatchKit App.entitlements"; sourceTree = "<group>"; };
 		0AE6C4B92564FF7900A033DA /* ETAppleIntegration WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ETAppleIntegration WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		0AE6C4BB2564FF7900A033DA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		0AFD697C2565829D0082C11C /* et_service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = et_service.pb.swift; sourceTree = "<group>"; };
+		0AFD6981256582A50082C11C /* et_service.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = et_service.proto; sourceTree = "<group>"; };
+		0AFD69B325658F0C0082C11C /* et_service.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = et_service.grpc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +100,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFD69FF256597F30082C11C /* GRPC in Frameworks */,
+				0AFD699E256587F70082C11C /* SwiftProtobufPluginLibrary in Frameworks */,
 				0AE6C4BC2564FF7900A033DA /* HealthKit.framework in Frameworks */,
+				0AFD699C256587F70082C11C /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +144,7 @@
 		0A90BEA825637809000065CC /* ETAppleIntegration WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0AFD697B256582750082C11C /* Protobuf */,
 				0AE6C4B92564FF7900A033DA /* ETAppleIntegration WatchKit Extension.entitlements */,
 				0AE6C4A82563D89300A033DA /* Sensors */,
 				0A90BEA925637809000065CC /* InterfaceController.swift */,
@@ -163,6 +176,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0AFD697B256582750082C11C /* Protobuf */ = {
+			isa = PBXGroup;
+			children = (
+				0AFD69B325658F0C0082C11C /* et_service.grpc.swift */,
+				0AFD6981256582A50082C11C /* et_service.proto */,
+				0AFD697C2565829D0082C11C /* et_service.pb.swift */,
+			);
+			path = Protobuf;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -179,6 +202,8 @@
 				0A90BE9825637808000065CC /* PBXTargetDependency */,
 			);
 			name = ETAppleIntegration;
+			packageProductDependencies = (
+			);
 			productName = ETAppleIntegration;
 			productReference = 0A90BE9125637808000065CC /* ETAppleIntegration.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
@@ -213,6 +238,11 @@
 			dependencies = (
 			);
 			name = "ETAppleIntegration WatchKit Extension";
+			packageProductDependencies = (
+				0AFD699B256587F70082C11C /* SwiftProtobuf */,
+				0AFD699D256587F70082C11C /* SwiftProtobufPluginLibrary */,
+				0AFD69FE256597F30082C11C /* GRPC */,
+			);
 			productName = "ETAppleIntegration WatchKit Extension";
 			productReference = 0A90BEA425637809000065CC /* ETAppleIntegration WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -246,6 +276,10 @@
 				Base,
 			);
 			mainGroup = 0A90BE8A25637808000065CC;
+			packageReferences = (
+				0AFD699A256587F70082C11C /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+				0AFD69FD256597F30082C11C /* XCRemoteSwiftPackageReference "grpc-swift" */,
+			);
 			productRefGroup = 0A90BE9225637808000065CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -289,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFD6982256582A50082C11C /* et_service.proto in Sources */,
 				0A90BEAE25637809000065CC /* NotificationController.swift in Sources */,
 				0AE6C4AA2563D8AF00A033DA /* ETCoreMotion.swift in Sources */,
 				0A90BEB025637809000065CC /* ComplicationController.swift in Sources */,
@@ -296,6 +331,8 @@
 				0AE6C4B42563E32100A033DA /* ETHealthKit.swift in Sources */,
 				0AE6C4AF2563D98E00A033DA /* ETSensor.swift in Sources */,
 				0A90BEAA25637809000065CC /* InterfaceController.swift in Sources */,
+				0AFD697D2565829D0082C11C /* et_service.pb.swift in Sources */,
+				0AFD69B425658F0C0082C11C /* et_service.grpc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +635,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0AFD699A256587F70082C11C /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf";
+			requirement = {
+				kind = exactVersion;
+				version = 1.13.0;
+			};
+		};
+		0AFD69FD256597F30082C11C /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift/";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0AFD699B256587F70082C11C /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AFD699A256587F70082C11C /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		0AFD699D256587F70082C11C /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AFD699A256587F70082C11C /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
+		};
+		0AFD69FE256597F30082C11C /* GRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AFD69FD256597F30082C11C /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPC;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A90BE8B25637808000065CC /* Project object */;
 }
