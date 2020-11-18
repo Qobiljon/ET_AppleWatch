@@ -5,31 +5,31 @@ import HealthKit
 class ETHealthKit {
     // variables
     private var healthStore: HKHealthStore?
-    private let dataTypes: Set<HKObjectType> = [
+    private let sampleTypes: Set<HKSampleType> = [
         // activity
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceCycling)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.appleStandTime)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.appleExerciseTime)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!,
+        HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
+        HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
+        HKQuantityType.quantityType(forIdentifier: .appleStandTime)!,
+        HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)!,
+        HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
         
         // hearing
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.environmentalAudioExposure)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.headphoneAudioExposure)!,
+        HKQuantityType.quantityType(forIdentifier: .environmentalAudioExposure)!,
+        HKQuantityType.quantityType(forIdentifier: .headphoneAudioExposure)!,
         
         // heart (vital)
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRateVariabilitySDNN)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.restingHeartRate)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.walkingHeartRateAverage)!,
+        HKQuantityType.quantityType(forIdentifier: .heartRate)!,
+        HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!,
+        HKQuantityType.quantityType(forIdentifier: .restingHeartRate)!,
+        HKQuantityType.quantityType(forIdentifier: .walkingHeartRateAverage)!,
         
         // mobility
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.walkingSpeed)!,
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.walkingStepLength)!,
+        HKQuantityType.quantityType(forIdentifier: .stepCount)!,
+        HKQuantityType.quantityType(forIdentifier: .walkingSpeed)!,
+        HKQuantityType.quantityType(forIdentifier: .walkingStepLength)!,
         
         // other data
-        HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.numberOfTimesFallen)!,
+        HKQuantityType.quantityType(forIdentifier: .numberOfTimesFallen)!,
     ]
     
     
@@ -39,11 +39,13 @@ class ETHealthKit {
             self.healthStore = HKHealthStore()
             
             guard let healthStore = self.healthStore else { return }
-            for dataType in self.dataTypes {
-                if healthStore.authorizationStatus(for: dataType) != HKAuthorizationStatus.sharingAuthorized {
+            for sampleType in self.sampleTypes {
+                if healthStore.authorizationStatus(for: sampleType) != HKAuthorizationStatus.sharingAuthorized {
                     requestHealthKitAuthorization(healthStore: healthStore) { (success, error) in
                         print("requestPermission success \(success)")
-                        guard let error = error else { return }
+                        guard let error = error else {
+                            return
+                        }
                         print("error \(error)")
                     }
                     break
@@ -57,23 +59,46 @@ class ETHealthKit {
     private func requestHealthKitAuthorization(healthStore: HKHealthStore, completion: @escaping (Bool, Error?) -> Void) {
         // authorization for what data
         // request authorization
-        healthStore.requestAuthorization(toShare: [], read: dataTypes, completion: completion)
+        healthStore.requestAuthorization(toShare: [], read: sampleTypes, completion: completion)
+    }
+    
+    func sampleResultHandler(sampleQuery: HKSampleQuery, samples: [HKSample]?, error: Error?) {
+        guard let samples = samples else {
+            if error != nil {
+                print("error \(error!)")
+            }
+            return
+        }
+        if samples.count > 0 {
+            print("\(samples.count) samples, e.g., \(samples[0])")
+        }
     }
     
     
     // sensor start/stop functions
-    func startSensing() {
-        guard let healthStore = self.healthStore else { return }
+    func startSensing() -> Bool {
+        guard let healthStore = self.healthStore else { return false }
         
-        for dataType in self.dataTypes {
-            if healthStore.authorizationStatus(for: dataType) != HKAuthorizationStatus.sharingAuthorized {
-                return
-            }
+        let predicate = HKQuery.predicateForSamples(
+            withStart: Calendar.current.date(byAdding: .month, value: -1, to: Date()), // a month ago
+            end: Date(), // today
+            options: .strictEndDate
+        )
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        for sampleType in self.sampleTypes {
+            let query = HKSampleQuery(
+                sampleType: sampleType,
+                predicate: predicate,
+                limit: Int(HKObjectQueryNoLimit),
+                sortDescriptors: [sortDescriptor],
+                resultsHandler: sampleResultHandler
+            )
+            healthStore.execute(query)
         }
-        
-        
+        return true
     }
-    func stopSensing() {
-        
+    
+    func stopSensing() -> Bool {
+        return false
     }
 }
