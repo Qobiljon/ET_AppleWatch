@@ -17,7 +17,7 @@ class ETSensor {
             try! group.syncShutdownGracefully()
         }
         
-        ETSensor.channel = ClientConnection.insecure(group: group).connect(host: "165.246.42.172", port: 50053)
+        ETSensor.channel = ClientConnection.insecure(group: group).connect(host: "165.246.42.173", port: 50051)
         return ETSensor.channel!
     }
     
