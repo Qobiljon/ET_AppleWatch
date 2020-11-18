@@ -27,17 +27,21 @@ class ETSensor {
         
         // perform an RPC
         let client = ETServiceClient(channel: channel)
-        client.submitDataRecord(.with{
+        let rpc = client.submitDataRecord(.with{
             $0.userID = 1
             $0.email = "nslabinha@gmail.com"
-            $0.campaignID = 1 // tbd change
+            $0.campaignID = 5 // tbd change
             
             $0.timestamp = timestamp
             $0.dataSource = dataSourceId
             $0.accuracy = 1.0
             $0.value = value
-        }).response.whenSuccess { response in
+        })
+        rpc.response.whenSuccess { response in
             print("gRPC success \(response.success)")
+        }
+        rpc.response.whenFailure { error in
+            print("gRPC error \(error)")
         }
     }
 }

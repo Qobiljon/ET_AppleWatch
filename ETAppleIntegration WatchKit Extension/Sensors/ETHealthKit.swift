@@ -66,21 +66,19 @@ class ETHealthKit {
         if samples.count > 0 {
             for sample in samples {
                 let _sample = sample as! HKQuantitySample
-                let sampleType = query.objectType!
-                let timestamp = _sample.endDate.timeIntervalSince1970 * 1000
-                let value = _sample.quantity
                 
-                print("\(sampleType), \(timestamp), \(value)")
+                let dataSourceId = getDataSourceId(objectType: query.objectType!)
+                let timestamp = Int64(_sample.endDate.timeIntervalSince1970 * 1000)
+                let value = "\(_sample.quantity)".data(using: .utf8)!
+                
+                ETSensor.submitData(
+                    dataSourceId: dataSourceId,
+                    timestamp: timestamp,
+                    value: value
+                )
+                // print("\(dataSourceId), \(timestamp), \(value)")
             }
         }
-    }
-    
-    
-    // permission check
-    private func requestHealthKitAuthorization(healthStore: HKHealthStore, completion: @escaping (Bool, Error?) -> Void) {
-        // authorization for what data
-        // request authorization
-        healthStore.requestAuthorization(toShare: [], read: sampleTypes, completion: completion)
     }
     
     
@@ -108,5 +106,54 @@ class ETHealthKit {
     }
     func stopSensing() -> Bool {
         return false
+    }
+    
+    
+    // utility functions
+    private func requestHealthKitAuthorization(healthStore: HKHealthStore, completion: @escaping (Bool, Error?) -> Void) {
+        // authorization for what data
+        // request authorization
+        healthStore.requestAuthorization(toShare: [], read: sampleTypes, completion: completion)
+    }
+    private func getDataSourceId(objectType: HKObjectType) -> Int32 {
+        switch objectType {
+        // activity
+        case HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!:
+            return 70
+        case HKQuantityType.quantityType(forIdentifier: .distanceCycling)!:
+            return 69
+        case HKQuantityType.quantityType(forIdentifier: .appleStandTime)!:
+            return 68
+        case HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)!:
+            return 67
+        case HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!:
+            return 66
+        // hearing
+        case HKQuantityType.quantityType(forIdentifier: .environmentalAudioExposure)!:
+            return 65
+        case HKQuantityType.quantityType(forIdentifier: .headphoneAudioExposure)!:
+            return 64
+        // heart (vital)
+        case HKQuantityType.quantityType(forIdentifier: .heartRate)!:
+            return 63
+        case HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!:
+            return 62
+        case HKQuantityType.quantityType(forIdentifier: .restingHeartRate)!:
+            return 61
+        case HKQuantityType.quantityType(forIdentifier: .walkingHeartRateAverage)!:
+            return 60
+        // mobility
+        case HKQuantityType.quantityType(forIdentifier: .stepCount)!:
+            return 59
+        case HKQuantityType.quantityType(forIdentifier: .walkingSpeed)!:
+            return 58
+        case HKQuantityType.quantityType(forIdentifier: .walkingStepLength)!:
+            return 57
+        // other data
+        case HKQuantityType.quantityType(forIdentifier: .numberOfTimesFallen)!:
+            return 56
+        default:
+            return -1
+        }
     }
 }
