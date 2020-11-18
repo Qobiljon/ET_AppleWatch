@@ -1,26 +1,34 @@
 import Foundation
 import CoreMotion
 
+
 class ETCoreMotion {
     // variables
-    private let motionManager = CMMotionManager()
-    private let operationQueue = OperationQueue()
+    private let motionManager: CMMotionManager!
+    private let operationQueue: OperationQueue!
+    
+    
+    // init function
+    init() {
+        self.motionManager = CMMotionManager()
+        self.operationQueue = OperationQueue()
+    }
     
     
     // sensor handlers (event listeners)
     private func accelerometerHandler(accelerometerData:CMAccelerometerData?, error: Error?) {
+        guard let _ = accelerometerData else { return }
         if error != nil {
             print("accelerometer error")
-        } else if accelerometerData != nil {
-            // let timestamp = data.timestamp.magnitude
-            // let acceleration = data.acceleration
+        } else {
             print("accelerometer event")
         }
     }
     private func deviceMotionHandler(deviceMotion:CMDeviceMotion?, error: Error?) {
+        guard let _ = deviceMotion else { return }
         if error != nil {
             print("deviceMotion error")
-        } else if deviceMotion != nil {
+        } else {
             print("device motion event")
         }
     }

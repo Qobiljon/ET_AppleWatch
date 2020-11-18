@@ -32,6 +32,12 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Sharing with EasyTrack server</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Sharing with EasyTrack server</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Sharing with EasyTrack server</string>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKWatchOnly</key>

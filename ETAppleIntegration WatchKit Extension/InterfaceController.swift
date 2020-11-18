@@ -1,5 +1,5 @@
-import WatchKit
 import Foundation
+import WatchKit
 
 
 class InterfaceController: WKInterfaceController {
@@ -21,14 +21,16 @@ class InterfaceController: WKInterfaceController {
     
     // ui event handlers
     @IBAction func startClick() {
+        ETSensor.health.printHealthData()
+        
         // start sensing
-        if ETSensor.motion.startSensing() {
+        /*if ETSensor.motion.startSensing() {
             // ui changes
             startButton.setEnabled(false)
             startButton.setBackgroundColor(UIColor.gray)
             stopButton.setEnabled(true)
             stopButton.setBackgroundColor(UIColor.purple)
-        }
+        }*/
     }
     @IBAction func stopClick() {
         // stop sensing
