@@ -61,12 +61,10 @@ class ETCoreMotion {
         }
         return false
     }
-    func stopAccelerometer() -> Bool {
+    func stopAccelerometer() {
         if motionManager.isAccelerometerActive {
             motionManager.stopAccelerometerUpdates()
-            return true
         }
-        return false
     }
     
     func startDeviceMotion() -> Bool {
@@ -77,12 +75,10 @@ class ETCoreMotion {
         }
         return false
     }
-    func stopDeviceMotion() -> Bool {
+    func stopDeviceMotion() {
         if motionManager.isDeviceMotionActive {
             motionManager.stopDeviceMotionUpdates()
-            return true
         }
-        return false
     }
     
     func startSensing() -> Bool {
@@ -90,9 +86,8 @@ class ETCoreMotion {
         let dmo = startDeviceMotion()
         return acc && dmo
     }
-    func stopSensing() -> Bool {
-        let acc = stopAccelerometer()
-        let dmo = stopDeviceMotion()
-        return acc && dmo
+    func stopSensing() {
+        stopAccelerometer()
+        stopDeviceMotion()
     }
 }

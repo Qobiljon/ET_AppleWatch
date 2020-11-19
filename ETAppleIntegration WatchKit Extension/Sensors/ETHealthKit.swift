@@ -104,8 +104,7 @@ class ETHealthKit {
         }
         return true
     }
-    func stopSensing() -> Bool {
-        return false
+    func stopSensing() {
     }
     
     
