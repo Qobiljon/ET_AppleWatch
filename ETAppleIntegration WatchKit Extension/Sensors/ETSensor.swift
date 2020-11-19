@@ -2,21 +2,25 @@ import Foundation
 import GRPC
 import NIO
 
+
 class ETSensor {
+    // variables
+    static let bootTime = Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime)
     public static let motion = ETCoreMotion()
     public static let health = ETHealthKit()
     private static var channel: ClientConnection?
+    private static let submitQueue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
     
+    // functions
     private static func getChannel() -> ClientConnection {
-        if ETSensor.channel != nil && ETSensor.channel?.connectivity.state == ConnectivityState.ready {
-            return ETSensor.channel!
+        if channel != nil && channel?.connectivity.state == ConnectivityState.ready {
+            return channel!
         }
         
-        let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-        ETSensor.channel = ClientConnection.insecure(group: group).connect(host: "165.246.42.173", port: 50051)
-        return ETSensor.channel!
+        let group = MultiThreadedEventLoopGroup(numberOfThreads: 50)
+        channel = ClientConnection.insecure(group: group).connect(host: "165.246.42.173", port: 50051)
+        return channel!
     }
-    
     public static func submitData(dataSourceId: Int32, timestamp: Int64, value: Data) {
         // get a channel
         let channel = getChannel()
@@ -32,11 +36,15 @@ class ETSensor {
             $0.accuracy = 1.0
             $0.value = value
         }
+        print("GRPC ==> making an rpc call")
+        print(request)
         let rpc = client.submitDataRecord(request)
         
         rpc.response.whenSuccess { result in
             if !result.success {
                 print("grpc success = false")
+            } else {
+                print("GRPC ==> success \(result.success)")
             }
         }
         rpc.response.whenFailure { error in

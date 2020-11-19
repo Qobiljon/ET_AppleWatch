@@ -23,7 +23,7 @@ class InterfaceController: WKInterfaceController {
     // ui event handlers
     @IBAction func startClick() {
         // start sensing
-        if /* ETSensor.motion.startSensing() && */ ETSensor.health.startSensing() {
+        if ETSensor.motion.startSensing() /*&& ETSensor.health.startSensing()*/ {
             // ui changes
             startButton.setEnabled(false)
             startButton.setBackgroundColor(UIColor.gray)
@@ -41,16 +41,5 @@ class InterfaceController: WKInterfaceController {
         startButton.setBackgroundColor(UIColor.blue)
         stopButton.setEnabled(false)
         stopButton.setBackgroundColor(UIColor.gray)
-    }
-    @IBAction func testClick() {
-        let dataSourceId = Int32(63) // HR
-        let timestamp = Int64(1605773847000)
-        let value = "65 count/min".data(using: .utf8)!
-        
-        ETSensor.submitData(
-            dataSourceId: dataSourceId,
-            timestamp: timestamp,
-            value: value
-        )
     }
 }

@@ -24,7 +24,7 @@ class ETCoreMotion {
             // print("accelerometer event")
             ETSensor.submitData(
                 dataSourceId: 55,
-                timestamp: Int64(accelerometerData.timestamp * 1000),
+                timestamp: Int64(Date(timeInterval: accelerometerData.timestamp, since: ETSensor.bootTime).timeIntervalSince1970 * 1000),
                 value: "\(accelerometerData.acceleration.x),\(accelerometerData.acceleration.y),\(accelerometerData.acceleration.z)".data(using: .utf8)!
             )
         }
@@ -45,7 +45,7 @@ class ETCoreMotion {
             
             ETSensor.submitData(
                 dataSourceId: 54,
-                timestamp: Int64(deviceMotion.timestamp * 1000),
+                timestamp: Int64(Date(timeInterval: deviceMotion.timestamp, since: ETSensor.bootTime).timeIntervalSince1970 * 1000),
                 value: strValue.data(using: .utf8)!
             )
         }
@@ -55,7 +55,7 @@ class ETCoreMotion {
     // sensor start/stop functions
     func startAccelerometer() -> Bool {
         if motionManager.isDeviceMotionAvailable {
-            motionManager.accelerometerUpdateInterval = 1.0 / 10.0
+            motionManager.accelerometerUpdateInterval = 1.0 / 1.0
             motionManager.startAccelerometerUpdates(to: operationQueue, withHandler: accelerometerHandler)
             return true
         }
@@ -69,7 +69,7 @@ class ETCoreMotion {
     
     func startDeviceMotion() -> Bool {
         if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = 1.0 / 10.0
+            motionManager.deviceMotionUpdateInterval = 1.0 / 1.0
             motionManager.startDeviceMotionUpdates(to: operationQueue, withHandler: deviceMotionHandler)
             return true
         }

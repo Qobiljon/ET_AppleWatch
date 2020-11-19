@@ -11,31 +11,23 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="ETAppleIntegration_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <button width="1" height="38" alignment="left" title="START" id="iCC-Fj-il4">
+                        <button width="1" height="67" alignment="left" title="START" id="iCC-Fj-il4">
                             <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="startClick" destination="AgC-eL-Hgc" id="mza-0y-sLT"/>
                             </connections>
                         </button>
-                        <button width="1" height="37" alignment="left" title="STOP" enabled="NO" id="ZXL-Zw-Fd2">
+                        <button width="1" height="67" alignment="left" title="STOP" enabled="NO" id="ZXL-Zw-Fd2">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="stopClick" destination="AgC-eL-Hgc" id="k4L-7h-ZEq"/>
                             </connections>
                         </button>
-                        <button width="1" height="37" alignment="left" title="TEST GRPC" id="cXA-5p-qLu">
-                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="testClick" destination="AgC-eL-Hgc" id="epH-2d-pAA"/>
-                            </connections>
-                        </button>
                     </items>
                     <connections>
                         <outlet property="startButton" destination="iCC-Fj-il4" id="ehr-Za-d3b"/>
                         <outlet property="stopButton" destination="ZXL-Zw-Fd2" id="Yie-N0-Db0"/>
-                        <outlet property="testButton" destination="cXA-5p-qLu" id="YRa-Pc-tv8"/>
                     </connections>
                 </controller>
             </objects>

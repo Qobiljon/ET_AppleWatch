@@ -87,7 +87,7 @@ class ETHealthKit {
         guard let healthStore = self.healthStore else { return false }
         
         let predicate = HKQuery.predicateForSamples(
-            withStart: Calendar.current.date(byAdding: .month, value: -1, to: Date()), // a month ago
+            withStart: Calendar.current.date(byAdding: .day, value: -1, to: Date()), // a day ago
             end: Date(), // today
             options: .strictEndDate
         )
