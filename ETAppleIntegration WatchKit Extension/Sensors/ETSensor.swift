@@ -17,18 +17,10 @@ class ETSensor {
         return ETSensor.channel!
     }
     
-    static var done = false
     public static func submitData(dataSourceId: Int32, timestamp: Int64, value: Data) {
-        if done {
-            return
-        } else {
-            done = true
-        }
-        
         // get a channel
         let channel = getChannel()
         let client = ETServiceClient(channel: channel)
-        print("GRPC ==> connection established")
         
         // call rpc
         let request = SubmitDataRecord.Request.with{
@@ -41,9 +33,14 @@ class ETSensor {
             $0.value = value
         }
         let rpc = client.submitDataRecord(request)
-        print("GRPC ==> rpc called")
         
-        rpc.response.whenSuccess { result in print("GRPC ==> success \(result.success)") }
-        rpc.response.whenFailure { error in print("GRPC ==> error \(error)") }
+        rpc.response.whenSuccess { result in
+            if !result.success {
+                print("grpc success = false")
+            }
+        }
+        rpc.response.whenFailure { error in
+            print("grpc error \(error)")
+        }
     }
 }
