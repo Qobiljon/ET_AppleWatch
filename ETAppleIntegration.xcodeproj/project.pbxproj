@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A6BC2D52568E55F00EF3B08 /* ETTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6BC2D42568E55F00EF3B08 /* ETTools.swift */; };
 		0A90BE9625637808000065CC /* ETAppleIntegration WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0A90BE9525637808000065CC /* ETAppleIntegration WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0A90BE9C25637808000065CC /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A90BE9A25637808000065CC /* Interface.storyboard */; };
 		0A90BE9E25637809000065CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A90BE9D25637809000065CC /* Assets.xcassets */; };
@@ -17,7 +18,6 @@
 		0A90BEB025637809000065CC /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90BEAF25637809000065CC /* ComplicationController.swift */; };
 		0A90BEB225637809000065CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A90BEB125637809000065CC /* Assets.xcassets */; };
 		0AE6C4AA2563D8AF00A033DA /* ETCoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4A92563D8AF00A033DA /* ETCoreMotion.swift */; };
-		0AE6C4AF2563D98E00A033DA /* ETSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4AE2563D98E00A033DA /* ETSensor.swift */; };
 		0AE6C4B42563E32100A033DA /* ETHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4B32563E32100A033DA /* ETHealthKit.swift */; };
 		0AE6C4BC2564FF7900A033DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE6C4BB2564FF7900A033DA /* HealthKit.framework */; };
 		0AFD697D2565829D0082C11C /* et_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFD697C2565829D0082C11C /* et_service.pb.swift */; };
@@ -71,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A6BC2D42568E55F00EF3B08 /* ETTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETTools.swift; sourceTree = "<group>"; };
 		0A90BE9125637808000065CC /* ETAppleIntegration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETAppleIntegration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A90BE9525637808000065CC /* ETAppleIntegration WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ETAppleIntegration WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A90BE9B25637808000065CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -85,7 +86,6 @@
 		0A90BEB325637809000065CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A90BEB425637809000065CC /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		0AE6C4A92563D8AF00A033DA /* ETCoreMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETCoreMotion.swift; sourceTree = "<group>"; };
-		0AE6C4AE2563D98E00A033DA /* ETSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSensor.swift; sourceTree = "<group>"; };
 		0AE6C4B32563E32100A033DA /* ETHealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHealthKit.swift; sourceTree = "<group>"; };
 		0AE6C4B82564FF5700A033DA /* ETAppleIntegration WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ETAppleIntegration WatchKit App.entitlements"; sourceTree = "<group>"; };
 		0AE6C4B92564FF7900A033DA /* ETAppleIntegration WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ETAppleIntegration WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -144,10 +144,11 @@
 		0A90BEA825637809000065CC /* ETAppleIntegration WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0AFD697B256582750082C11C /* Protobuf */,
+				0AFD697B256582750082C11C /* Protos */,
 				0AE6C4B92564FF7900A033DA /* ETAppleIntegration WatchKit Extension.entitlements */,
-				0AE6C4A82563D89300A033DA /* Sensors */,
+				0AE6C4A82563D89300A033DA /* Sensing */,
 				0A90BEA925637809000065CC /* InterfaceController.swift */,
+				0A6BC2D42568E55F00EF3B08 /* ETTools.swift */,
 				0A90BEAB25637809000065CC /* ExtensionDelegate.swift */,
 				0A90BEAD25637809000065CC /* NotificationController.swift */,
 				0A90BEAF25637809000065CC /* ComplicationController.swift */,
@@ -158,14 +159,13 @@
 			path = "ETAppleIntegration WatchKit Extension";
 			sourceTree = "<group>";
 		};
-		0AE6C4A82563D89300A033DA /* Sensors */ = {
+		0AE6C4A82563D89300A033DA /* Sensing */ = {
 			isa = PBXGroup;
 			children = (
 				0AE6C4A92563D8AF00A033DA /* ETCoreMotion.swift */,
-				0AE6C4AE2563D98E00A033DA /* ETSensor.swift */,
 				0AE6C4B32563E32100A033DA /* ETHealthKit.swift */,
 			);
-			path = Sensors;
+			path = Sensing;
 			sourceTree = "<group>";
 		};
 		0AE6C4BA2564FF7900A033DA /* Frameworks */ = {
@@ -176,14 +176,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0AFD697B256582750082C11C /* Protobuf */ = {
+		0AFD697B256582750082C11C /* Protos */ = {
 			isa = PBXGroup;
 			children = (
 				0AFD69B325658F0C0082C11C /* et_service.grpc.swift */,
 				0AFD6981256582A50082C11C /* et_service.proto */,
 				0AFD697C2565829D0082C11C /* et_service.pb.swift */,
 			);
-			path = Protobuf;
+			path = Protos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +325,11 @@
 			files = (
 				0AFD6982256582A50082C11C /* et_service.proto in Sources */,
 				0A90BEAE25637809000065CC /* NotificationController.swift in Sources */,
+				0A6BC2D52568E55F00EF3B08 /* ETTools.swift in Sources */,
 				0AE6C4AA2563D8AF00A033DA /* ETCoreMotion.swift in Sources */,
 				0A90BEB025637809000065CC /* ComplicationController.swift in Sources */,
 				0A90BEAC25637809000065CC /* ExtensionDelegate.swift in Sources */,
 				0AE6C4B42563E32100A033DA /* ETHealthKit.swift in Sources */,
-				0AE6C4AF2563D98E00A033DA /* ETSensor.swift in Sources */,
 				0A90BEAA25637809000065CC /* InterfaceController.swift in Sources */,
 				0AFD697D2565829D0082C11C /* et_service.pb.swift in Sources */,
 				0AFD69B425658F0C0082C11C /* et_service.grpc.swift in Sources */,
