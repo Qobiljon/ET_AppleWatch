@@ -17,6 +17,8 @@
 		0A90BEAE25637809000065CC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90BEAD25637809000065CC /* NotificationController.swift */; };
 		0A90BEB025637809000065CC /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90BEAF25637809000065CC /* ComplicationController.swift */; };
 		0A90BEB225637809000065CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A90BEB125637809000065CC /* Assets.xcassets */; };
+		0AE2373D25698497004734C8 /* ETFileHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE2373C25698497004734C8 /* ETFileHandlers.swift */; };
+		0AE23745256984A5004734C8 /* ETSubmissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE23744256984A5004734C8 /* ETSubmissionHandler.swift */; };
 		0AE6C4AA2563D8AF00A033DA /* ETCoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4A92563D8AF00A033DA /* ETCoreMotion.swift */; };
 		0AE6C4B42563E32100A033DA /* ETHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6C4B32563E32100A033DA /* ETHealthKit.swift */; };
 		0AE6C4BC2564FF7900A033DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE6C4BB2564FF7900A033DA /* HealthKit.framework */; };
@@ -85,6 +87,8 @@
 		0A90BEB125637809000065CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A90BEB325637809000065CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A90BEB425637809000065CC /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		0AE2373C25698497004734C8 /* ETFileHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETFileHandlers.swift; sourceTree = "<group>"; };
+		0AE23744256984A5004734C8 /* ETSubmissionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETSubmissionHandler.swift; sourceTree = "<group>"; };
 		0AE6C4A92563D8AF00A033DA /* ETCoreMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETCoreMotion.swift; sourceTree = "<group>"; };
 		0AE6C4B32563E32100A033DA /* ETHealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHealthKit.swift; sourceTree = "<group>"; };
 		0AE6C4B82564FF5700A033DA /* ETAppleIntegration WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ETAppleIntegration WatchKit App.entitlements"; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 		0A90BEA825637809000065CC /* ETAppleIntegration WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0AE2373B25698482004734C8 /* Atomic */,
 				0AFD697B256582750082C11C /* Protos */,
 				0AE6C4B92564FF7900A033DA /* ETAppleIntegration WatchKit Extension.entitlements */,
 				0AE6C4A82563D89300A033DA /* Sensing */,
@@ -157,6 +162,15 @@
 				0A90BEB425637809000065CC /* PushNotificationPayload.apns */,
 			);
 			path = "ETAppleIntegration WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		0AE2373B25698482004734C8 /* Atomic */ = {
+			isa = PBXGroup;
+			children = (
+				0AE2373C25698497004734C8 /* ETFileHandlers.swift */,
+				0AE23744256984A5004734C8 /* ETSubmissionHandler.swift */,
+			);
+			path = Atomic;
 			sourceTree = "<group>";
 		};
 		0AE6C4A82563D89300A033DA /* Sensing */ = {
@@ -325,11 +339,13 @@
 			files = (
 				0AFD6982256582A50082C11C /* et_service.proto in Sources */,
 				0A90BEAE25637809000065CC /* NotificationController.swift in Sources */,
+				0AE2373D25698497004734C8 /* ETFileHandlers.swift in Sources */,
 				0A6BC2D52568E55F00EF3B08 /* ETTools.swift in Sources */,
 				0AE6C4AA2563D8AF00A033DA /* ETCoreMotion.swift in Sources */,
 				0A90BEB025637809000065CC /* ComplicationController.swift in Sources */,
 				0A90BEAC25637809000065CC /* ExtensionDelegate.swift in Sources */,
 				0AE6C4B42563E32100A033DA /* ETHealthKit.swift in Sources */,
+				0AE23745256984A5004734C8 /* ETSubmissionHandler.swift in Sources */,
 				0A90BEAA25637809000065CC /* InterfaceController.swift in Sources */,
 				0AFD697D2565829D0082C11C /* et_service.pb.swift in Sources */,
 				0AFD69B425658F0C0082C11C /* et_service.grpc.swift in Sources */,
