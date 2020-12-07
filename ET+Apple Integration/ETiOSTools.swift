@@ -27,6 +27,13 @@ class ETiOSTools {
             ], replyHandler: wcReplyHandler, errorHandler: wcErrorHandler)
         }
     }
+    static func fileExists(fileName: String) -> Bool {
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            return false
+        }
+        let fileUrl = documentsUrl.appendingPathComponent(fileName, isDirectory: false)
+        return FileManager.default.fileExists(atPath: fileUrl.path)
+    }
 }
 
 extension ETiOSTools {

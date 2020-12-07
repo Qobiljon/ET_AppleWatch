@@ -6,8 +6,6 @@ import WatchConnectivity
 class ETwatchOSTools {
     // constants
     static let bootTime = Date(timeIntervalSinceNow: -ProcessInfo.processInfo.systemUptime)
-    private static let queue = DispatchQueue(label: "wc-submission-queue")
-    private static var isSubmitting = false
     
     // others
     static func scheduleNextBGDataSubmissionTask() {
@@ -34,14 +32,6 @@ class ETwatchOSTools {
         return res
     }
     static func submitDataWc() {
-        ETwatchOSTools.queue.sync {
-            if ETwatchOSTools.isSubmitting {
-                return
-            } else {
-                ETwatchOSTools.isSubmitting = true
-            }
-        }
-        
         if let acquisitionFile = ETwatchOSAcquisitionFile.getInstance() {
             do {
                 try acquisitionFile.moveContentToBatchFiles()
@@ -59,12 +49,10 @@ class ETwatchOSTools {
                     for fileName in submissionFileNames {
                         if let file = ETwatchOSSubmissionFile.getInstance(fileName: fileName) {
                             let batchContent = try file.readBatchContentForWc()
-                            if WCSession.default.isCompanionAppInstalled && WCSession.default.isReachable {
-                                WCSession.default.sendMessage([
-                                    "batchContent": batchContent,
-                                    "fileName": fileName,
-                                ], replyHandler: wcReplyHandler, errorHandler: wcErrorHandler)
-                            }
+                            WCSession.default.sendMessage([
+                                "batchContent": batchContent,
+                                "fileName": fileName,
+                            ], replyHandler: wcReplyHandler, errorHandler: wcErrorHandler)
                         }
                     }
                 }
@@ -73,10 +61,6 @@ class ETwatchOSTools {
             }
         } else {
             print("failed to get acquisition file")
-        }
-        
-        queue.sync {
-            ETwatchOSTools.isSubmitting = false
         }
     }
 }

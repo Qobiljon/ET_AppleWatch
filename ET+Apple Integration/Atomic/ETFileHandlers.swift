@@ -129,7 +129,32 @@ class ETiOSSubmissionFile {
         }
     }
     
-    
+    static func createFileWithContent(fileName: String, content: String) throws {
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            throw NSError(domain: "atomic file handler cannot resolve documents directory", code: 1, userInfo: nil)
+        }
+        
+        // remove old file if exists
+        if ETiOSTools.fileExists(fileName: fileName) {
+            do {
+                let fileUrl = documentsUrl.appendingPathComponent(fileName, isDirectory: false)
+                try FileManager.default.removeItem(at: fileUrl)
+                
+                if ETiOSSubmissionFile.instances[fileName] != nil {
+                    ETiOSSubmissionFile.instances.removeValue(forKey: fileName)
+                }
+                try ETiOSSubmissionFile.getInstance(fileName: fileName)?.removeFile()
+            } catch {
+                print("failed to remove previously submitted file \(fileName), error=\(error)")
+            }
+        }
+        
+        // create new file with new content
+        let fileUrl = documentsUrl.appendingPathComponent(fileName, isDirectory: false)
+        if !FileManager.default.createFile(atPath: fileUrl.path, contents: content.data(using: .utf8), attributes: nil) {
+            throw NSError(domain: "error creating an acquisition file", code: 1, userInfo: nil)
+        }
+    }
     func readBatchContentForGrpc() throws -> ([Int32], [Int64], [Data]) {
         var dataSourceIds: [Int32] = []
         var timestamps: [Int64] = []

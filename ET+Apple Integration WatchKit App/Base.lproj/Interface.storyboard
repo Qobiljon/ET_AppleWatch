@@ -11,20 +11,13 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="ET_Apple_Integration_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label width="1" height="104" alignment="left" textAlignment="center" numberOfLines="3" id="Rkb-x6-YRp">
-                            <string key="text">ET+Apple sensing
+                        <label width="1" height="146" alignment="left" textAlignment="center" numberOfLines="3" id="Rkb-x6-YRp">
+                            <string key="text">EasyTrack + Apple
+
 (running)</string>
                             <color key="textColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </label>
-                        <button width="1" alignment="left" title="SUBMIT DATA" id="A5J-0Z-VbQ">
-                            <connections>
-                                <action selector="submitClick" destination="AgC-eL-Hgc" id="Th4-kb-KaU"/>
-                            </connections>
-                        </button>
                     </items>
-                    <connections>
-                        <outlet property="submitButton" destination="A5J-0Z-VbQ" id="1ui-LT-krV"/>
-                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>

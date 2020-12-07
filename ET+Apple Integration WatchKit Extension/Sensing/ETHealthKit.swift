@@ -4,29 +4,29 @@ import HealthKit
 
 let HK_DATA_SOURCE_IDS: [HKQuantityType:Int32] = [
     // activity
-    HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)! : 70,
-    HKQuantityType.quantityType(forIdentifier: .distanceCycling)! : 69,
-    HKQuantityType.quantityType(forIdentifier: .appleStandTime)! : 68,
-    HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)! : 67,
-    HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)! : 66,
+    HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)! : 14,
+    HKQuantityType.quantityType(forIdentifier: .distanceCycling)! : 16,
+    HKQuantityType.quantityType(forIdentifier: .appleStandTime)! : 6,
+    HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)! : 12,
+    HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)! : 17,
     
     // hearing
-    HKQuantityType.quantityType(forIdentifier: .environmentalAudioExposure)! : 65,
-    HKQuantityType.quantityType(forIdentifier: .headphoneAudioExposure)! : 64,
+    HKQuantityType.quantityType(forIdentifier: .environmentalAudioExposure)! : 18,
+    HKQuantityType.quantityType(forIdentifier: .headphoneAudioExposure)! : 11,
     
     // heart (vital)
-    HKQuantityType.quantityType(forIdentifier: .heartRate)! : 63,
-    HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN)! : 62,
-    HKQuantityType.quantityType(forIdentifier: .restingHeartRate)! : 61,
-    HKQuantityType.quantityType(forIdentifier: .walkingHeartRateAverage)! : 60,
+    HKQuantityType.quantityType(forIdentifier: .heartRate)! : 10,
+    HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN)! : 9,
+    HKQuantityType.quantityType(forIdentifier: .restingHeartRate)! : 7,
+    HKQuantityType.quantityType(forIdentifier: .walkingHeartRateAverage)! : 4,
     
     // mobility
-    HKQuantityType.quantityType(forIdentifier: .stepCount)! : 59,
-    HKQuantityType.quantityType(forIdentifier: .walkingSpeed)! : 58,
-    HKQuantityType.quantityType(forIdentifier: .walkingStepLength)! : 57,
+    HKQuantityType.quantityType(forIdentifier: .stepCount)! : 5,
+    HKQuantityType.quantityType(forIdentifier: .walkingSpeed)! : 3,
+    HKQuantityType.quantityType(forIdentifier: .walkingStepLength)! : 2,
     
     // other data
-    HKQuantityType.quantityType(forIdentifier: .numberOfTimesFallen)! : 56,
+    HKQuantityType.quantityType(forIdentifier: .numberOfTimesFallen)! : 8,
 ]
 let HK_DATA_TYPES = Array(HK_DATA_SOURCE_IDS.keys)
 func getHKDataSourceId(_ quantityType: HKQuantityType) -> Int32? {

@@ -2,8 +2,8 @@ import Foundation
 import CoreMotion
 
 
-let DEVICE_MOTION_DATA_SOURCE_ID = Int32(54)
-let ACCELEROMETER_DATA_SOURCE_ID = Int32(55)
+let DEVICE_MOTION_DATA_SOURCE_ID = Int32(15)
+let ACCELEROMETER_DATA_SOURCE_ID = Int32(13)
 
 class ETCoreMotion {
     private let motionManager = CMMotionManager()
@@ -74,7 +74,7 @@ class ETCoreMotion {
     
     func startAccelerometerAcquisition() {
         if self.motionManager.isAccelerometerAvailable && !self.motionManager.isAccelerometerActive {
-            self.motionManager.accelerometerUpdateInterval = 1.0 / 1.0
+            self.motionManager.accelerometerUpdateInterval = 1.0 / 20.0
             self.motionManager.startAccelerometerUpdates(to: operationQueue, withHandler: accelerometerHandler)
         }
     }
@@ -85,7 +85,7 @@ class ETCoreMotion {
     }
     func startDeviceMotionAcquisition() {
         if self.motionManager.isDeviceMotionAvailable && !self.motionManager.isDeviceMotionActive {
-            self.motionManager.deviceMotionUpdateInterval = 1.0 / 1.0
+            self.motionManager.deviceMotionUpdateInterval = 1.0 / 20.0
             self.motionManager.startDeviceMotionUpdates(to: operationQueue, withHandler: deviceMotionHandler)
         }
     }
