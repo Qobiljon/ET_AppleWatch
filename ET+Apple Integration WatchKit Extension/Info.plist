@@ -32,8 +32,25 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>WKBackgroundModes</key>
+	<array>
+		<string>physical-therapy</string>
+		<string>workout-processing</string>
+	</array>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Sharing with EasyTrack server</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Sharing with EasyTrack server</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Sharing with EasyTrack server</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>
 	<true/>
 </dict>

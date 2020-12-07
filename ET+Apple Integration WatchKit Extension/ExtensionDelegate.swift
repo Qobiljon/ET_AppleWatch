@@ -1,55 +1,97 @@
-//
-//  ExtensionDelegate.swift
-//  ET+Apple Integration WatchKit Extension
-//
-//  Created by Kevin on 2020/11/24.
-//
-
 import WatchKit
+import WatchConnectivity
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
-
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        // App launched --> make final initializations
+        if WCSession.isSupported() {
+            WCSession.default.delegate = self
+            WCSession.default.activate()
+            print("wc activated")
+        } else {
+            print("wc not supported")
+        }
+        
+        ETwatchOSTools.scheduleNextBGDataSubmissionTask()
+        ETCoreMotion.getInstance()?.startAccelerometerAcquisition()
+        ETCoreMotion.getInstance()?.startDeviceMotionAcquisition()
+        ETHealthKit.getInstance()?.startHealthKitAcquisition()
     }
-
     func applicationDidBecomeActive() {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        // Moved from inactive to active state --> restart any tasks that were paused / not started, refresh ui
+        
+        ETwatchOSTools.scheduleNextBGDataSubmissionTask()
+        ETCoreMotion.getInstance()?.startAccelerometerAcquisition()
+        ETCoreMotion.getInstance()?.startDeviceMotionAcquisition()
+        ETHealthKit.getInstance()?.startHealthKitAcquisition()
     }
-
     func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
+        // About to move from active to inactive state (e.g., phone call, SMS, quit the app and transition to background state) --> pause ongoing tasks
     }
-
+    
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        ETwatchOSTools.scheduleNextBGDataSubmissionTask()
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
         for task in backgroundTasks {
-            // Use a switch statement to check the task type
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // Be sure to complete the background task once you’re done.
+                ETCoreMotion.getInstance()?.startAccelerometerAcquisition()
+                ETCoreMotion.getInstance()?.startDeviceMotionAcquisition()
+                ETHealthKit.getInstance()?.startHealthKitAcquisition()
+                ETwatchOSTools.submitDataWc()
+                
+                print("handle() backgroundTask function call")
                 backgroundTask.setTaskCompletedWithSnapshot(false)
-            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
-                // Snapshot tasks have a unique completion call, make sure to set your expiration date
-                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
-            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
-                // Be sure to complete the connectivity task once you’re done.
-                connectivityTask.setTaskCompletedWithSnapshot(false)
-            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
-                // Be sure to complete the URL session task once you’re done.
-                urlSessionTask.setTaskCompletedWithSnapshot(false)
-            case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
-                // Be sure to complete the relevant-shortcut task once you're done.
-                relevantShortcutTask.setTaskCompletedWithSnapshot(false)
-            case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
-                // Be sure to complete the intent-did-run task once you're done.
-                intentDidRunTask.setTaskCompletedWithSnapshot(false)
             default:
-                // make sure to complete unhandled task types
+                // Make sure to complete unhandled task types
                 task.setTaskCompletedWithSnapshot(false)
             }
         }
     }
+}
 
+extension ExtensionDelegate : WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        switch activationState {
+        case .activated:
+            print("wcSession activated")
+            break
+        case .inactive:
+            print("wcSession activated")
+            break
+        case .notActivated:
+            print("wcSession not activated")
+            break
+        default:
+            break
+        }
+    }
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        if let action = message["action"] {
+            switch action as! String {
+            case "submitFiles":
+                ETwatchOSTools.submitDataWc()
+                break
+            case "removeFile":
+                if let fileName = message["fileName"], let submissionFile = ETwatchOSSubmissionFile.getInstance(fileName: fileName as! String) {
+                    do {
+                        try submissionFile.removeFile()
+                    } catch {
+                        print("error removing file \(fileName), error=\(error)")
+                    }
+                }
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    private func wcReplyHandler(message: [String:Any]) {
+        print("ExtensionDelegate.wcReplyHandler \(message)")
+    }
+    private func wcErrorHandler(error: Error) {
+        print("ExtensionDelegate.wcErrorHandler \(error)")
+    }
 }

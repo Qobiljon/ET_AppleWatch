@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,20 @@
 		0AA8673A256C24CB0083F8DA /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA86739256C24CB0083F8DA /* NotificationController.swift */; };
 		0AA8673C256C24CB0083F8DA /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8673B256C24CB0083F8DA /* ComplicationController.swift */; };
 		0AA8673E256C24CB0083F8DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8673D256C24CB0083F8DA /* Assets.xcassets */; };
+		0AA86754256C24FE0083F8DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA86753256C24FE0083F8DA /* HealthKit.framework */; };
+		0AA86757256C25190083F8DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA86756256C25190083F8DA /* HealthKit.framework */; };
+		0AA86773256C26E40083F8DA /* ETCoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA86771256C26E40083F8DA /* ETCoreMotion.swift */; };
+		0AA86774256C26E40083F8DA /* ETHealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA86772256C26E40083F8DA /* ETHealthKit.swift */; };
+		0AA8677A256C26F30083F8DA /* ETFileHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA86778256C26F30083F8DA /* ETFileHandlers.swift */; };
+		0AA86791256C28BC0083F8DA /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA86790256C28BC0083F8DA /* GRPC */; };
+		0AA86798256C29FB0083F8DA /* ETSubmissionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA86796256C29FB0083F8DA /* ETSubmissionHandler.swift */; };
+		0AA86799256C29FB0083F8DA /* ETFileHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA86797256C29FB0083F8DA /* ETFileHandlers.swift */; };
+		0AA867A1256C2A650083F8DA /* ETwatchOSTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA867A0256C2A650083F8DA /* ETwatchOSTools.swift */; };
+		0AA867A6256C2A760083F8DA /* ETiOSTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA867A5256C2A760083F8DA /* ETiOSTools.swift */; };
+		0AA867C9256C2C6B0083F8DA /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA867C8256C2C6B0083F8DA /* SwiftProtobuf */; };
+		0AA867E5256C2E4D0083F8DA /* et_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA867E2256C2E4D0083F8DA /* et_service.pb.swift */; };
+		0AA867E6256C2E4D0083F8DA /* et_service.proto in Sources */ = {isa = PBXBuildFile; fileRef = 0AA867E3256C2E4D0083F8DA /* et_service.proto */; };
+		0AA867E7256C2E4D0083F8DA /* et_service.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA867E4256C2E4D0083F8DA /* et_service.grpc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +101,20 @@
 		0AA8673D256C24CB0083F8DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AA8673F256C24CB0083F8DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA86740256C24CB0083F8DA /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		0AA86751256C24FE0083F8DA /* ET+Apple Integration.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ET+Apple Integration.entitlements"; sourceTree = "<group>"; };
+		0AA86753256C24FE0083F8DA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		0AA86755256C25190083F8DA /* ET+Apple Integration WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ET+Apple Integration WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		0AA86756256C25190083F8DA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS7.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		0AA86771256C26E40083F8DA /* ETCoreMotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETCoreMotion.swift; sourceTree = "<group>"; };
+		0AA86772256C26E40083F8DA /* ETHealthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETHealthKit.swift; sourceTree = "<group>"; };
+		0AA86778256C26F30083F8DA /* ETFileHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETFileHandlers.swift; sourceTree = "<group>"; };
+		0AA86796256C29FB0083F8DA /* ETSubmissionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETSubmissionHandler.swift; sourceTree = "<group>"; };
+		0AA86797256C29FB0083F8DA /* ETFileHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETFileHandlers.swift; sourceTree = "<group>"; };
+		0AA867A0256C2A650083F8DA /* ETwatchOSTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETwatchOSTools.swift; sourceTree = "<group>"; };
+		0AA867A5256C2A760083F8DA /* ETiOSTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETiOSTools.swift; sourceTree = "<group>"; };
+		0AA867E2256C2E4D0083F8DA /* et_service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = et_service.pb.swift; sourceTree = "<group>"; };
+		0AA867E3256C2E4D0083F8DA /* et_service.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; path = et_service.proto; sourceTree = "<group>"; };
+		0AA867E4256C2E4D0083F8DA /* et_service.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = et_service.grpc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +122,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA86791256C28BC0083F8DA /* GRPC in Frameworks */,
+				0AA86754256C24FE0083F8DA /* HealthKit.framework in Frameworks */,
+				0AA867C9256C2C6B0083F8DA /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA86757256C25190083F8DA /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +146,7 @@
 				0AA86725256C24CA0083F8DA /* ET+Apple Integration WatchKit App */,
 				0AA86734256C24CB0083F8DA /* ET+Apple Integration WatchKit Extension */,
 				0AA8670E256C24C90083F8DA /* Products */,
+				0AA86752256C24FE0083F8DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +163,10 @@
 		0AA8670F256C24C90083F8DA /* ET+Apple Integration */ = {
 			isa = PBXGroup;
 			children = (
+				0AA867E1256C2E3B0083F8DA /* Protos */,
+				0AA86795256C29E90083F8DA /* Atomic */,
+				0AA86751256C24FE0083F8DA /* ET+Apple Integration.entitlements */,
+				0AA867A5256C2A760083F8DA /* ETiOSTools.swift */,
 				0AA86710256C24C90083F8DA /* AppDelegate.swift */,
 				0AA86712256C24C90083F8DA /* SceneDelegate.swift */,
 				0AA86714256C24C90083F8DA /* ViewController.swift */,
@@ -154,6 +191,10 @@
 		0AA86734256C24CB0083F8DA /* ET+Apple Integration WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0AA86766256C26A70083F8DA /* Sensing */,
+				0AA86765256C269F0083F8DA /* Atomic */,
+				0AA86755256C25190083F8DA /* ET+Apple Integration WatchKit Extension.entitlements */,
+				0AA867A0256C2A650083F8DA /* ETwatchOSTools.swift */,
 				0AA86735256C24CB0083F8DA /* InterfaceController.swift */,
 				0AA86737256C24CB0083F8DA /* ExtensionDelegate.swift */,
 				0AA86739256C24CB0083F8DA /* NotificationController.swift */,
@@ -163,6 +204,51 @@
 				0AA86740256C24CB0083F8DA /* PushNotificationPayload.apns */,
 			);
 			path = "ET+Apple Integration WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		0AA86752256C24FE0083F8DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0AA86756256C25190083F8DA /* HealthKit.framework */,
+				0AA86753256C24FE0083F8DA /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0AA86765256C269F0083F8DA /* Atomic */ = {
+			isa = PBXGroup;
+			children = (
+				0AA86778256C26F30083F8DA /* ETFileHandlers.swift */,
+			);
+			path = Atomic;
+			sourceTree = "<group>";
+		};
+		0AA86766256C26A70083F8DA /* Sensing */ = {
+			isa = PBXGroup;
+			children = (
+				0AA86771256C26E40083F8DA /* ETCoreMotion.swift */,
+				0AA86772256C26E40083F8DA /* ETHealthKit.swift */,
+			);
+			path = Sensing;
+			sourceTree = "<group>";
+		};
+		0AA86795256C29E90083F8DA /* Atomic */ = {
+			isa = PBXGroup;
+			children = (
+				0AA86797256C29FB0083F8DA /* ETFileHandlers.swift */,
+				0AA86796256C29FB0083F8DA /* ETSubmissionHandler.swift */,
+			);
+			path = Atomic;
+			sourceTree = "<group>";
+		};
+		0AA867E1256C2E3B0083F8DA /* Protos */ = {
+			isa = PBXGroup;
+			children = (
+				0AA867E4256C2E4D0083F8DA /* et_service.grpc.swift */,
+				0AA867E2256C2E4D0083F8DA /* et_service.pb.swift */,
+				0AA867E3256C2E4D0083F8DA /* et_service.proto */,
+			);
+			path = Protos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +269,10 @@
 				0AA86724256C24CA0083F8DA /* PBXTargetDependency */,
 			);
 			name = "ET+Apple Integration";
+			packageProductDependencies = (
+				0AA86790256C28BC0083F8DA /* GRPC */,
+				0AA867C8256C2C6B0083F8DA /* SwiftProtobuf */,
+			);
 			productName = "ET+Apple Integration";
 			productReference = 0AA8670D256C24C90083F8DA /* ET+Apple Integration.app */;
 			productType = "com.apple.product-type.application";
@@ -250,6 +340,10 @@
 				Base,
 			);
 			mainGroup = 0AA86704256C24C90083F8DA;
+			packageReferences = (
+				0AA8678F256C28BC0083F8DA /* XCRemoteSwiftPackageReference "grpc-swift" */,
+				0AA867B9256C2BAA0083F8DA /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+			);
 			productRefGroup = 0AA8670E256C24C90083F8DA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -296,9 +390,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA867A6256C2A760083F8DA /* ETiOSTools.swift in Sources */,
+				0AA86799256C29FB0083F8DA /* ETFileHandlers.swift in Sources */,
 				0AA86715256C24C90083F8DA /* ViewController.swift in Sources */,
+				0AA867E6256C2E4D0083F8DA /* et_service.proto in Sources */,
 				0AA86711256C24C90083F8DA /* AppDelegate.swift in Sources */,
+				0AA867E7256C2E4D0083F8DA /* et_service.grpc.swift in Sources */,
 				0AA86713256C24C90083F8DA /* SceneDelegate.swift in Sources */,
+				0AA86798256C29FB0083F8DA /* ETSubmissionHandler.swift in Sources */,
+				0AA867E5256C2E4D0083F8DA /* et_service.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +408,11 @@
 			files = (
 				0AA8673A256C24CB0083F8DA /* NotificationController.swift in Sources */,
 				0AA8673C256C24CB0083F8DA /* ComplicationController.swift in Sources */,
+				0AA867A1256C2A650083F8DA /* ETwatchOSTools.swift in Sources */,
 				0AA86738256C24CB0083F8DA /* ExtensionDelegate.swift in Sources */,
+				0AA8677A256C26F30083F8DA /* ETFileHandlers.swift in Sources */,
+				0AA86773256C26E40083F8DA /* ETCoreMotion.swift in Sources */,
+				0AA86774256C26E40083F8DA /* ETHealthKit.swift in Sources */,
 				0AA86736256C24CB0083F8DA /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "ET+Apple Integration WatchKit Extension/ET+Apple Integration WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6394GVLT7J;
 				INFOPLIST_FILE = "ET+Apple Integration WatchKit Extension/Info.plist";
@@ -493,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "ET+Apple Integration WatchKit Extension/ET+Apple Integration WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6394GVLT7J;
 				INFOPLIST_FILE = "ET+Apple Integration WatchKit Extension/Info.plist";
@@ -558,6 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ET+Apple Integration/ET+Apple Integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6394GVLT7J;
 				INFOPLIST_FILE = "ET+Apple Integration/Info.plist";
@@ -579,6 +686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ET+Apple Integration/ET+Apple Integration.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6394GVLT7J;
 				INFOPLIST_FILE = "ET+Apple Integration/Info.plist";
@@ -636,6 +744,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0AA8678F256C28BC0083F8DA /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift/";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		0AA867B9256C2BAA0083F8DA /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf";
+			requirement = {
+				kind = exactVersion;
+				version = 1.13.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0AA86790256C28BC0083F8DA /* GRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AA8678F256C28BC0083F8DA /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPC;
+		};
+		0AA867C8256C2C6B0083F8DA /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AA867B9256C2BAA0083F8DA /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0AA86705256C24C90083F8DA /* Project object */;
 }
